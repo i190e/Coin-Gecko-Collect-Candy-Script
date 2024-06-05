@@ -46,14 +46,14 @@ def searchIco(icoPath: str , click_Needed: bool):
 def writeToFile(filePath: str, messageString: str):
  with open(filePath, "a") as logFile:
     logFile.write("\n")
-    logFile.write(str)
+    logFile.write(messageString)
  return
 # Programm body
 
 logfile =  work_path + "BotLogFile.log"    # log file path
 is_accessible = os.access(logfile,os.F_OK) # Check access to file
 
-writeToFile(logfile,"Bot Start at: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+writeToFile(logfile,"Bot Start at: " + str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
 writeToFile(logfile,"File Access: " + str(is_accessible))
 writeToFile(logfile,"Log file path: " + logfile)
 
@@ -116,6 +116,6 @@ time.sleep(2)
 pyautogui.hotkey("ctrl", "w") # close tab
 time.sleep(2)
 #close CoinGeckoUrl end
-writeToFile(logfile,"Bot End at: "+datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+writeToFile(logfile,"Bot End at: " + str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
 
 
