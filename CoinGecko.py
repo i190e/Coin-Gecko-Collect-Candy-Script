@@ -40,9 +40,7 @@ with open(logfile, "a") as logFile:
     logFile.write("Log file path: " + logfile)
     logFile.write("\n")
 #open CoinGeckoUrl
-print("start")
 webbrowser.open(CoinGeckoCandyUrl)
-print("\nOpen URL ")
 with open(logfile, "a") as logFile:
  logFile.write("Open URL: " + CoinGeckoUrl)
  logFile.write("\n")
