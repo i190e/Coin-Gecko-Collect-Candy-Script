@@ -28,8 +28,26 @@ RememberMeCheckBox_Button=ButtonsPath+"RememberMeCheckBox.png"
 TodayGreen_Button=ButtonsPath+"TodayGreen.png"
 TodayWhite_Button=ButtonsPath+"TodayWhite.png"
 
+# Programm Function
+# Search ico function 
+def searchIco(icoPath: str , click_Needed: bool):
+  for i in range(1,5,1):
+   posIco_Button = imagesearch(icoPath)
+   if (posIco_Button[0] != -1):
+    if(click_Needed==True): # if need Click - click on ico
+     pyautogui.moveTo(posIco_Button[0]+4, posIco_Button[1]-60, duration = 1)
+     pyautogui.click()
+     time.sleep(2)
+     break
+    else:
+     return True # return True if ico found
+  return False # return False if ico not found
+
+
+# Programm body
+
 logfile =  work_path + "BotLogFile.log"    # log file path
-is_accessible = os.access(logfile,os.F_OK)
+is_accessible = os.access(logfile,os.F_OK) # Check access to file
 
 with open(logfile, "a") as logFile:
     logFile.write("\n")
@@ -49,75 +67,54 @@ time.sleep(10)
 
 
 #check login status start
-for i in range(1,5,1):
- posLoginTrue_Button = imagesearch(LoginTrue_Button)
- if posLoginTrue_Button[0] != -1:
+if (searchIco(LoginTrue_Button,False)):
     loginStatus=True
     with open(logfile, "a") as logFile:
      logFile.write("Login status: " + str(loginStatus))
      logFile.write("\n")
-    break
- else:
-   logFile.write("Login not confirmed")
- time.sleep(10) 
+else:
+    with open(logfile, "a") as logFile:
+     logFile.write("Login not confirmed")
+time.sleep(10) 
 #check login status end
-
-
-
 
 #login status false start
 if loginStatus==False:
   with open(logfile, "a") as logFile:
    logFile.write("Attempt Login")
    logFile.write("\n")
-
 #login status false end
 
 
 
 #login status true start
 if loginStatus==True:
- for i in range(1,5,1):
-  posCandyPod_Button = imagesearch(CandyPod_Button)
-  if posCandyPod_Button[0] != -1:
+ if (searchIco(CandyPod_Button,True)):
     with open(logfile, "a") as logFile:
      logFile.write("posCandyPod_Button found")
      logFile.write("\n")
-    print(str(posCandyPod_Button[0])+ " " + str(posCandyPod_Button[1]))
-    pyautogui.moveTo(posCandyPod_Button[0]+4, posCandyPod_Button[1]-60, duration = 1)
-    pyautogui.click()
     time.sleep(2)
-    break
-  time.sleep(5)
+ time.sleep(5)
   
 #collected  start
- for i in range(1,5,1):
-   posCollect_Button = imagesearch(CandyCollect_Button)
-   if posCollect_Button[0] != -1:
-    pyautogui.moveTo(posCollect_Button[0]+4, posCollect_Button[1]-60, duration = 1)
-    pyautogui.click()
+ if (searchIco(CandyCollect_Button,True)):
     with open(logfile, "a") as logFile:
      logFile.write("Candy Collected")
      logFile.write("\n")
-    break
-   time.sleep(5)  
+ time.sleep(5)  
 #collected end
 
   
-#collected status check start
-
- for i in range(1,5,1):
-   Collected_Button = imagesearch(TodayGreen_Button)
-   if Collected_Button[0] != -1:
+ #collected status check start
+ if (searchIco(TodayGreen_Button,False)):
     with open(logfile, "a") as logFile:
      logFile.write("Collected Confirmed")
      logFile.write("\n")
     collectedStatus=True
-    break
-   time.sleep(5)
-  #collected status check end 
+ time.sleep(5)
+ #collected status check end 
   
-  #collected status false start
+ #collected status false start
  if collectedStatus==False: 
   with open(logfile, "a") as logFile:
    logFile.write("Collected Not Corfimed")
@@ -138,3 +135,5 @@ time.sleep(2)
 with open(logfile, "a") as logFile:
  logFile.write("Bot End at: "+datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
  logFile.write("\n")
+
+
