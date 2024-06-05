@@ -43,46 +43,39 @@ def searchIco(icoPath: str , click_Needed: bool):
      return True # return True if ico found
   return False # return False if ico not found
 
-
+def writeToFile(filePath: str, messageString: str):
+ with open(filePath, "a") as logFile:
+    logFile.write("\n")
+    logFile.write(str)
+ return
 # Programm body
 
 logfile =  work_path + "BotLogFile.log"    # log file path
 is_accessible = os.access(logfile,os.F_OK) # Check access to file
 
-with open(logfile, "a") as logFile:
-    logFile.write("\n")
-    logFile.write("Bot Start at: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
-    logFile.write("\n")
-    logFile.write("File Access: " + str(is_accessible))
-    logFile.write("\n")
-    logFile.write("Log file path: " + logfile)
-    logFile.write("\n")
-#open CoinGeckoUrl
+writeToFile(logfile,"Bot Start at: " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
+writeToFile(logfile,"File Access: " + str(is_accessible))
+writeToFile(logfile,"Log file path: " + logfile)
+
+#open CoinGeckoUrl start
 webbrowser.open(CoinGeckoCandyUrl)
-with open(logfile, "a") as logFile:
- logFile.write("Open URL: " + CoinGeckoUrl)
- logFile.write("\n")
+writeToFile(logfile,"Open URL: " + CoinGeckoUrl)
 time.sleep(10)
-#open CoinGeckoUrl
+#open CoinGeckoUrl end
 
 
 #check login status start
 if (searchIco(LoginTrue_Button,False)):
     loginStatus=True
-    with open(logfile, "a") as logFile:
-     logFile.write("Login status: " + str(loginStatus))
-     logFile.write("\n")
+    writeToFile(logfile,"Login status: " + str(loginStatus))
 else:
-    with open(logfile, "a") as logFile:
-     logFile.write("Login not confirmed")
+    writeToFile(logfile,"Login not confirmed")
 time.sleep(10) 
 #check login status end
 
 #login status false start
 if loginStatus==False:
-  with open(logfile, "a") as logFile:
-   logFile.write("Attempt Login")
-   logFile.write("\n")
+  writeToFile(logfile,"Attempt Login")
 #login status false end
 
 
@@ -90,35 +83,27 @@ if loginStatus==False:
 #login status true start
 if loginStatus==True:
  if (searchIco(CandyPod_Button,True)):
-    with open(logfile, "a") as logFile:
-     logFile.write("posCandyPod_Button found")
-     logFile.write("\n")
+    writeToFile(logfile,"posCandyPod_Button found")
     time.sleep(2)
  time.sleep(5)
   
 #collected  start
  if (searchIco(CandyCollect_Button,True)):
-    with open(logfile, "a") as logFile:
-     logFile.write("Candy Collected")
-     logFile.write("\n")
+    writeToFile(logfile,"Candy Collected")
  time.sleep(5)  
 #collected end
 
   
  #collected status check start
  if (searchIco(TodayGreen_Button,False)):
-    with open(logfile, "a") as logFile:
-     logFile.write("Collected Confirmed")
-     logFile.write("\n")
+    writeToFile(logfile,"Collected Confirmed")
     collectedStatus=True
  time.sleep(5)
  #collected status check end 
   
  #collected status false start
  if collectedStatus==False: 
-  with open(logfile, "a") as logFile:
-   logFile.write("Collected Not Corfimed")
-   logFile.write("\n")
+  writeToFile(logfile,"Collected Not Corfimed")
   collectedStatus=False
  
   #collected status false end 
@@ -131,9 +116,6 @@ time.sleep(2)
 pyautogui.hotkey("ctrl", "w") # close tab
 time.sleep(2)
 #close CoinGeckoUrl end
-
-with open(logfile, "a") as logFile:
- logFile.write("Bot End at: "+datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
- logFile.write("\n")
+writeToFile(logfile,"Bot End at: "+datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
 
 
