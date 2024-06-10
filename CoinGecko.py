@@ -1,3 +1,4 @@
+from random import randint
 from python_imagesearch.imagesearch import imagesearch,imagesearcharea
 import webbrowser
 import time
@@ -37,7 +38,7 @@ def searchIco(icoPath: str , click_Needed: bool):
     if(click_Needed==True): # if need Click - click on ico
      pyautogui.moveTo(posIco_Button[0]+4, posIco_Button[1]-60, duration = 1)
      pyautogui.click()
-     time.sleep(2)
+     time.sleep(randint(1,3))
      break
     else:
      return True # return True if ico found
@@ -50,6 +51,8 @@ def writeToFile(filePath: str, messageString: str):
     logFile.write(messageString)
  return
 
+
+
 # Programm body
 logfile =  work_path + "BotLogFile.log"    # log file path
 is_accessible = os.access(logfile,os.F_OK) # Check access to file
@@ -61,7 +64,7 @@ writeToFile(logfile,"Log file path: " + logfile)
 #open CoinGeckoUrl start
 webbrowser.open(CoinGeckoCandyUrl)
 writeToFile(logfile,"Open URL: " + CoinGeckoUrl)
-time.sleep(10)
+time.sleep(randint(5,10))
 #open CoinGeckoUrl end
 
 
@@ -71,7 +74,7 @@ if (searchIco(LoginTrue_Button,False)):
     writeToFile(logfile,"Login status: " + str(loginStatus))
 else:
     writeToFile(logfile,"Login not confirmed")
-time.sleep(10) 
+time.sleep(randint(5,10)) 
 #check login status end
 
 #login status false start
@@ -85,13 +88,13 @@ if loginStatus==False:
 if loginStatus==True:
  if (searchIco(CandyPod_Button,True)):
     writeToFile(logfile,"posCandyPod_Button found")
-    time.sleep(2)
- time.sleep(5)
+    time.sleep(randint(1,3))
+ time.sleep(randint(2,6))
   
 #collected  start
  if (searchIco(CandyCollect_Button,True)):
     writeToFile(logfile,"Candy Collected")
- time.sleep(5)  
+ time.sleep(randint(2,6))  
 #collected end
 
   
@@ -99,7 +102,7 @@ if loginStatus==True:
  if (searchIco(TodayGreen_Button,False)):
     writeToFile(logfile,"Collected Confirmed")
     collectedStatus=True
- time.sleep(5)
+ time.sleep(randint(2,6))
  #collected status check end 
   
  #collected status false start
@@ -111,11 +114,11 @@ if loginStatus==True:
 #login status true end
 
 #close CoinGeckoUrl start
-time.sleep(5)
+time.sleep(randint(2,5))
 pyautogui.click() #return focus to page if change
-time.sleep(2)
+time.sleep(randint(1,3))
 pyautogui.hotkey("ctrl", "w") # close tab
-time.sleep(2)
+time.sleep(randint(1,3))
 #close CoinGeckoUrl end
 writeToFile(logfile,"Bot End at: " + str(datetime.now().strftime("%Y-%m-%d %H:%M:%S")))
 
