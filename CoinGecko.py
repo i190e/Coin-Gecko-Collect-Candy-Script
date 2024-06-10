@@ -43,13 +43,14 @@ def searchIco(icoPath: str , click_Needed: bool):
      return True # return True if ico found
   return False # return False if ico not found
 
+# Write message to log file
 def writeToFile(filePath: str, messageString: str):
  with open(filePath, "a") as logFile:
     logFile.write("\n")
     logFile.write(messageString)
  return
-# Programm body
 
+# Programm body
 logfile =  work_path + "BotLogFile.log"    # log file path
 is_accessible = os.access(logfile,os.F_OK) # Check access to file
 
