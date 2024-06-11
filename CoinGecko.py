@@ -80,8 +80,46 @@ time.sleep(randint(5,10))
 #login status false start
 if loginStatus==False:
   writeToFile(logfile,"Attempt Login")
+if (searchIco(LoginButton_Button,True)):
+  writeToFile(logfile,"LoginButton_Button found")
+  time.sleep(randint(1,3))
+
+ # attempt login if auto fill enabled and work
+if (searchIco(RememberMeCheckBox_Button,False)):
+  writeToFile(logfile,"RememberMeCheckBox enable")
+  time.sleep(randint(1,3))
+else:
+  writeToFile(logfile,"RememberMeCheckBox enabled not found")
+  time.sleep(randint(1,3))
+
+ # write code to enable check box if empty (create ico for seach)
+ #
+ #
+if (searchIco(LoginGreenButton_Button,True)):
+  writeToFile(logfile,"LoginGreenButton_Button found")
+  time.sleep(randint(1,3))
+time.sleep(randint(7,10))
+
+if (searchIco(CapchaCheck_Button,False)):
+  writeToFile(logfile,"CapchaCheck found")
+  time.sleep(randint(1,3))
+time.sleep(randint(5,10))
+
+if (searchIco(CapchaCheckBox_Button,True)):
+  writeToFile(logfile,"CapchaCheckBox_Button found")
+  time.sleep(randint(1,3))
+time.sleep(randint(5,10))
+
 #login status false end
 
+#repeat check login status start
+if (searchIco(LoginTrue_Button,False)):
+    loginStatus=True
+    writeToFile(logfile,"Login attempt status: " + str(loginStatus))
+else:
+    writeToFile(logfile,"Attempt Login not confirmed")
+time.sleep(randint(5,10)) 
+#repeat check login status end
 
 
 #login status true start
